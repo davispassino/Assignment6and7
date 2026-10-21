@@ -45,7 +45,9 @@ def has_won(feedback):
     while feedback == "GGGGG":
         
 
+#Practice comment
 
+print("practice")
     
 
 letters = choose_word()
