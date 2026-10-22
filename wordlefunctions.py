@@ -1,3 +1,7 @@
+#Here is my function file
+
+#Here is my choose word function:
+
 def choose_word():
     
     import random
@@ -15,15 +19,22 @@ def choose_word():
 
     word = random.choice(words)
     letters = list(word)
-    print(letters)
     return letters
 
-def get_guess():
-    player_guess = input("Guess a five letter word: ")
-    player_guess = player_guess.lower()
+#Here is my function that gets the player's guess and adds it to a list:
+
+def get_guess(previous_guess):
+    player_guess = input("Guess a five letter word: ").lower()
+    while len(player_guess) != 5 or not player_guess.isalpha() or player_guess in previous_guess:
+        print("Invalid guess! Try again!")
+        player_guess = input("Guess a five letter word: ").lower()
+
+    previous_guess.append(player_guess)
+    
     player_letters = list(player_guess)
-    print(player_letters)
     return player_letters
+
+#Here is my function that will evaluate the player's guess and give feedback:
 
 def evaluate_guess(letters, player_letters):
     feedback = ""
@@ -34,23 +45,18 @@ def evaluate_guess(letters, player_letters):
             feedback += "Y"
         else:
             feedback += "-"
-    print(feedback)
     return(feedback)
 
-def display_guess(letters, feedback):
-    print("".join(letters).upper())
-    print(feedback)
+#Here is the function where the player's guess is displayed as well as the feedback is displayed:
 
-def has_won(feedback):
-    while feedback == "GGGGG":
-        
+def display_guess(player_letters, feedback):
+    print("Guess: " + "".join(player_letters).upper())
+    print(f"Feedback: {feedback}")
 
-#Practice comment
+#Here is the function that determines if the player has guessed the word:
 
-print("practice")
-    
-
-letters = choose_word()
-player_letters = get_guess()
-feedback = evaluate_guess(letters, player_letters)
-display_guess(letters, feedback)
+def has_won (feedback):
+    if feedback == "GGGGG":
+        return(True)
+    else:
+        return(False)
